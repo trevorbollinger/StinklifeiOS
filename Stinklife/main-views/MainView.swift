@@ -10,13 +10,37 @@ import SwiftUI
 struct MainView: View {
     
     @EnvironmentObject var person: Person
+    
+    @EnvironmentObject var AJ: Friend
+    @EnvironmentObject var Andrew: Friend
+    @EnvironmentObject var Audra: Friend
+    @EnvironmentObject var Augie: Friend
+    @EnvironmentObject var Bayley: Friend
+    @EnvironmentObject var Gabe: Friend
+    @EnvironmentObject var Jace: Friend
+    @EnvironmentObject var Jared: Friend
+    @EnvironmentObject var Jaden: Friend
+    @EnvironmentObject var Jerika: Friend
+    @EnvironmentObject var Luke: Friend
+    @EnvironmentObject var Mason: Friend
+    @EnvironmentObject var Nathan: Friend
+    @EnvironmentObject var NexFlax: Friend
+    @EnvironmentObject var Trevor: Friend
+    @EnvironmentObject var Zach: Friend
+    @EnvironmentObject var RyanFoley: Friend
+    
+    
     @Binding var lines: [(text: String, type: String)]
-    @Binding var people: [(name: String, gender: String, alive: String)]
+    //@Binding var people: [(name: String, gender: String, alive: String)]
+    @Binding var people: [Friend]
     @Binding var selectedIndex: Int
-    @Binding var randomLinesPositive: [String]
-    @Binding var randomLinesNegative: [String]
+    @Binding var randomEventsList: [String]
+
     @Binding var bodyPartsList: [String]
     @Binding var assaultActionList: [String]
+    
+    @State var eventProbability = 15.0
+    
     
     @State var countries = [
         "Afghanistan",
@@ -267,8 +291,11 @@ struct MainView: View {
         "Yemen",
         "Zambia",
         "Zimbabwe",
-        "Åland Islands"
+        "Åland Islands",
+        "your moms house"
     ];
+    
+    @State var popUpEvent = false
     
     var body: some View {
         NavigationView {
@@ -296,25 +323,97 @@ struct MainView: View {
                 
                 
                 //Age Button
-                Button(action: {
-                    person.increaseAge()
-                    lines.append((text: "Age \(person.age)", type: "A"))
-                    if person.age == 69 {
-                        lines.append((text: "nice!", type: "W"))
-                    }
-                    randomEvents()
-                }, label: {
-                    Text("Age!")
-                        .font(.system(size: 20))
-                        .foregroundColor(Color.white)
-                        .frame(maxWidth: .infinity)
-                })
-                .buttonStyle(BlueButton())
+                if person.alive {
+                    Button(action: {
+                        person.increaseAge()
+                        addLine(text: "Age \(person.age)", type: "Age")
+                        if person.age == 69 {
+                            addLine(text: "nice!", type: "Cen")
+                        }
+                        
+                        if person.jailed && person.jailTime <= 0 {
+                            addLine(text: "I have been released from jail.", type: "N")
+                            person.jailed = false
+                        }
+                        
+                        
+
+                        randomEvents()
+                    }, label: {
+                        Text("Age")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color.white)
+                            .frame(maxWidth: .infinity)
+                    })
+                    .buttonStyle(BlueButton())
+                } else {
+                    Button(action: {
+                        person.ressurect()
+                        person.needsCreation = true
+                        //people = [AJ, Andrew, Audra, Augie, Bayley, Gabe, Jace, Jared, Jaden, Jerika, Luke, Mason, Nathan, NexFlax, Trevor, Zach, RyanFoley]
+                        selectedIndex = 0
+                              lines = [(text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: " ", type: "X"), (text: "welcom!", type: "W"), ]
+                    }, label: {
+                        Text("New Life")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color.white)
+                            .frame(maxWidth: .infinity)
+                    })
+                    .buttonStyle(BlueButton())
+                }
+    
+            }
+            .sheet(isPresented: $popUpEvent) {
                 
+                switch Int.random(in: 0...100){
+                case 0...50:
+                    popUpView(prompt: "You encounter a magician performing on the street. Would you like to initiate combat?",
+                              acceptText: "I have initiated combat towards the street magician.",
+                              declineText: "I decided not to assault the street magician.",
+                              result: "poop",
+                              playerIsAttacked: false,
+                              playerAttacks: true,
+                              jailMsg: "I have been arrested for the murder of an innocent street magician.",
+                              deathMsg: "The street magician has killed me.",
+                              popUpEvent: $popUpEvent,
+                              lines: $lines)
+                    .environmentObject(person)
+                    .presentationDetents([.medium])
+
+
+                case 51...100:
+                    popUpView(prompt: "You are walking home from the store and get mugged. Would you like to initiate combat?",
+                              acceptText: "I have attacked my attacker.",
+                              declineText: "I started crying and ran away from my attacker.",
+                              result: "poop",
+                              playerIsAttacked: false,
+                              playerAttacks: true,
+                              jailMsg: "I have been arrested for murdering my attacker, even though it was in self defense.",
+                              deathMsg: "I have lost the fight against my attacker and died.",
+                              popUpEvent: $popUpEvent,
+                              lines: $lines)
+                    .environmentObject(person)
+                    .presentationDetents([.medium])
+
+                default:
+                    popUpView(prompt: "You encounter a magician performing on the street. Would you like to initiate combat?",
+                              acceptText: "I have initiated combat towards the street magician.",
+                              declineText: "I decided not to assault the street magician.",
+                              result: "poop",
+                              playerIsAttacked: false,
+                              playerAttacks: true,
+                              jailMsg: "jail",
+                              deathMsg: "death",
+                              popUpEvent: $popUpEvent,
+                              lines: $lines)
+                    .environmentObject(person)
+                    .presentationDetents([.medium])
+
+                }
             }
             
             //NavigationView Modifiers
-            .navigationTitle(person.name)
+            .navigationTitle("\(person.name)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .automatic) {
@@ -326,51 +425,62 @@ struct MainView: View {
                 }
             }
             
-            //Death Cover View
-            .fullScreenCover(isPresented: $person.dead) {
-                ObituaryView(lines: $lines, selectedIndex: $selectedIndex)
-            }
-            //Character Creation Sheet
-            .fullScreenCover(isPresented: $person.needsCreation) {
-                CreateCharacter(selectedIndex: $selectedIndex)
-            }
+
+
         }
     }
     
     
     func randomEvents(){
-        var forkliftVictim = randomPerson()
-        if randomChance(probability: 35) {
-            lines.append((text: randomLinePositive() , type: "R")) }
-        else if randomChance(probability: 50) {
-            lines.append((text: randomLineNegative(), type: "R")) }
-        
-        if randomChance(probability: 15) {
-            lines.append((text :"\(randomCountry()) has declared war on \(randomCountry())", type: "R")) }
-        
-        if randomChance(probability: 2) {
-            lines.append((text: "\(randomPerson().name) has \(randomAssaultAction()) my \(randomBodyPart())", type: "R"))
-            lines.append((text: "I frickin died", type: "R"))
-            person.dead = true
-        }
-        
-        if randomChance(probability: 15) {
-            lines.append((text: "\(randomPerson().name) has \(randomAssaultAction()) my \(randomBodyPart())", type: "R")) }
-        
-        if randomChance(probability: 15) {
-            //selectedIndex = 2
-            forkliftVictim.alive = "false"
-            lines.append((text: "\(forkliftVictim.name) has died from a \(randomBodyPart()) injury, following a forklift combat accident", type: "R"))
-        }
+        if person.age > 0 {
+            if randomChance(probability: 55) {
+                addLine(text: "BREAKING NEWS: "+randomEvent() , type: "Rand") }
+            
+            if randomChance(probability: 12) {
+                addLine(text: "\(randomCountry()) has declared war on \(randomCountry())", type: "Rand") }
+            
+            if randomChance(probability: 10) {
+                addLine(text: "The nations of \(randomCountry()), \(randomCountry()), and \(randomCountry()) have signed a peace treaty.", type: "Rand") }
+            
+            if randomChance(probability: 0) {
+                addLine(text: "\(randomPerson().name) has \(randomAssaultAction()) my \(randomBodyPart())", type: "Rand")
+                death()
+            }
+            
+            if randomChance(probability: 18) {
+                addLine(text: "\(randomPerson().name) has \(randomAssaultAction()) my \(randomBodyPart())", type: "Rand") }
+            
+            if randomChance(probability: 3) {
+                let forkliftVictim = randomPerson()
+                //selectedIndex = 2
+                forkliftVictim.alive = false
+                addLine(text: "\(forkliftVictim.name) has died from a \(randomBodyPart()) injury, following a forklift combat accident", type: "Rand")
 
+            }
+            
+            if randomChance(probability: (person.deathChance/100)) {
+                death()
+            }
+            
+            if randomChance(probability: eventProbability) && !person.jailed && person.age >= 10 {
+                popUpEvent = true
+            }
+        }
     }
     
-    func randomLinePositive() -> String {
-        return randomLinesPositive[Int.random(in: 0..<randomLinesPositive.count)]
+ 
+    func checkForItem(target: String, person: Person) -> Bool {
+        for items in person.items {
+            if items == target {
+                return true
+            }
+        }
+        return false
     }
-    func randomLineNegative() -> String {
-         return randomLinesNegative[Int.random(in: 0..<randomLinesNegative.count)]
-     }
+    
+    func randomEvent() -> String {
+        return randomEventsList[Int.random(in: 0..<randomEventsList.count)]
+    }
     
     func randomBodyPart() -> String {
         return bodyPartsList[Int.random(in: 0..<bodyPartsList.count)] }
@@ -381,8 +491,19 @@ struct MainView: View {
     func randomCountry() -> String {
         return countries[Int.random(in: 0..<countries.count)] }
     
-    func randomPerson() -> (name: String, gender: String, alive: String) {
+    func randomPerson() -> Friend {
         return people[Int.random(in: 0..<people.count)] }
+    
+    func addLine(text: String, type: String) -> Void {
+        lines.append((text: text, type: type))
+    }
+    func death() -> Void {
+        addLine(text: "I have died.", type: "Death")
+        person.dead = true
+        person.alive = false
+        selectedIndex = 0
+
+    }
 }
 
 
@@ -410,15 +531,14 @@ struct MainView: View {
 //     (name: "Trevor", gender: "M", alive: "true")]
 //
 //
-//    @State static var randomLinesPositive = ["I got absolutely fucked!", "someone shit in the park!", "frick! my dog died!", "someone bombed my house!", "somsone fucked ur mom! xD lmao", "I went to the strip club! ;)", "the eiffel tower has been relocated from Paris to Beijing!", "I ripped your bong so hard you threw up! gnarly bro!", "a stranger has broken into my house and fucked my dog! not again!"]
+//    @State static var randomEventsList = ["I got absolutely fucked!", "someone shit in the park!", "frick! my dog died!", "someone bombed my house!", "somsone fucked ur mom! xD lmao", "I went to the strip club! ;)", "the eiffel tower has been relocated from Paris to Beijing!", "I ripped your bong so hard you threw up! gnarly bro!", "a stranger has broken into my house and fucked my dog! not again!"]
 //    @State static var bodyPartsList = ["head", "shoulders", "knees", "toes", "feet", "chest", "neck", "ears", "eyes", "nose", "mouth", "torso", "belly", "chest", "arms", "legs", "penis", "vagina", "foreskin", "clitoris", "anus", "back", "ballsack", "fingers", "eyelid", "coccyx"]
 //
 //    @State static var assaultActionList = ["inverted", "creamed", "fricked", "decimated", "annihilated", "scraped", "tickled", "pleasured", "removed", "ate", "licked", "blended and drank", "shoved my head into", "licked passionately", "took out a gun and shot", "bombed", "painted"]
 //
-//    @State  static var randomLinesNegative = ["your microwave dinner caught on fire and burned down the neighborhood"]
 //
 //    static var previews: some View {
-//        MainView(lines: $lines, people: $people, selectedIndex: $selectedIndex, randomLinesPositive: $randomLinesPositive, randomLinesNegative: $randomLinesNegative, bodyPartsList: $bodyPartsList, assaultActionList: $assaultActionList)
+//        MainView(lines: $lines, people: $people, selectedIndex: $selectedIndex, randomEventsList: $randomEventsList, bodyPartsList: $bodyPartsList, assaultActionList: $assaultActionList)
 //            .environmentObject(Person())
 //    }
 //}

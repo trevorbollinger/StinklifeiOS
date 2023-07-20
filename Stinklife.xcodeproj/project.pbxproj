@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		348AE69929FAFF1800CAD889 /* popUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348AE69829FAFF1800CAD889 /* popUpView.swift */; };
+		B9112F84298875F20026457C /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9112F83298875F20026457C /* Friend.swift */; };
+		B9112F862988943D0026457C /* shopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9112F852988943D0026457C /* shopView.swift */; };
+		B9112F8829889B5C0026457C /* jobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9112F8729889B5C0026457C /* jobView.swift */; };
 		B98449AC2985AA1400004884 /* StinklifeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449AB2985AA1400004884 /* StinklifeApp.swift */; };
 		B98449B02985AA1600004884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B98449AF2985AA1600004884 /* Assets.xcassets */; };
 		B98449B32985AA1600004884 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B98449B22985AA1600004884 /* Preview Assets.xcassets */; };
@@ -20,14 +24,16 @@
 		B98449D02985AAE700004884 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449CC2985AAE700004884 /* SettingsView.swift */; };
 		B98449D12985AAE700004884 /* PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449CD2985AAE700004884 /* PeopleView.swift */; };
 		B98449D22985AAE700004884 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449CE2985AAE700004884 /* FriendsView.swift */; };
-		B98449D72985AAEE00004884 /* CreateCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449D32985AAEE00004884 /* CreateCharacter.swift */; };
-		B98449D82985AAEE00004884 /* chatview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449D42985AAEE00004884 /* chatview.swift */; };
 		B98449D92985AAEE00004884 /* ObituaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449D52985AAEE00004884 /* ObituaryView.swift */; };
 		B98449DA2985AAEE00004884 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449D62985AAEE00004884 /* StatsView.swift */; };
 		B98449DD2985AB8A00004884 /* tabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98449DC2985AB8A00004884 /* tabBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		348AE69829FAFF1800CAD889 /* popUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpView.swift; sourceTree = "<group>"; };
+		B9112F83298875F20026457C /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		B9112F852988943D0026457C /* shopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shopView.swift; sourceTree = "<group>"; };
+		B9112F8729889B5C0026457C /* jobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jobView.swift; sourceTree = "<group>"; };
 		B98449A82985AA1400004884 /* Stinklife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stinklife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98449AB2985AA1400004884 /* StinklifeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StinklifeApp.swift; sourceTree = "<group>"; };
 		B98449AF2985AA1600004884 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,8 +48,6 @@
 		B98449CC2985AAE700004884 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B98449CD2985AAE700004884 /* PeopleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleView.swift; sourceTree = "<group>"; };
 		B98449CE2985AAE700004884 /* FriendsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
-		B98449D32985AAEE00004884 /* CreateCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCharacter.swift; sourceTree = "<group>"; };
-		B98449D42985AAEE00004884 /* chatview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chatview.swift; sourceTree = "<group>"; };
 		B98449D52985AAEE00004884 /* ObituaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObituaryView.swift; sourceTree = "<group>"; };
 		B98449D62985AAEE00004884 /* StatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		B98449DC2985AB8A00004884 /* tabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tabBarView.swift; sourceTree = "<group>"; };
@@ -111,10 +115,11 @@
 		B98449BA2985AA7700004884 /* sub-views */ = {
 			isa = PBXGroup;
 			children = (
-				B98449D42985AAEE00004884 /* chatview.swift */,
-				B98449D32985AAEE00004884 /* CreateCharacter.swift */,
 				B98449D52985AAEE00004884 /* ObituaryView.swift */,
 				B98449D62985AAEE00004884 /* StatsView.swift */,
+				B9112F852988943D0026457C /* shopView.swift */,
+				B9112F8729889B5C0026457C /* jobView.swift */,
+				348AE69829FAFF1800CAD889 /* popUpView.swift */,
 			);
 			path = "sub-views";
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 				B98449C12985AACD00004884 /* LIne.swift */,
 				B98449C22985AACD00004884 /* LineView.swift */,
 				B98449C32985AACD00004884 /* Person.swift */,
+				B9112F83298875F20026457C /* Friend.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9112F862988943D0026457C /* shopView.swift in Sources */,
 				B98449C92985AACD00004884 /* Buttons.swift in Sources */,
 				B98449CF2985AAE700004884 /* MainView.swift in Sources */,
 				B98449C82985AACD00004884 /* Person.swift in Sources */,
@@ -227,12 +234,13 @@
 				B98449D92985AAEE00004884 /* ObituaryView.swift in Sources */,
 				B98449C02985AAAE00004884 /* randomPerson.swift in Sources */,
 				B98449D02985AAE700004884 /* SettingsView.swift in Sources */,
-				B98449D82985AAEE00004884 /* chatview.swift in Sources */,
 				B98449D22985AAE700004884 /* FriendsView.swift in Sources */,
 				B98449C62985AACD00004884 /* LIne.swift in Sources */,
 				B98449D12985AAE700004884 /* PeopleView.swift in Sources */,
+				B9112F8829889B5C0026457C /* jobView.swift in Sources */,
+				348AE69929FAFF1800CAD889 /* popUpView.swift in Sources */,
 				B98449AC2985AA1400004884 /* StinklifeApp.swift in Sources */,
-				B98449D72985AAEE00004884 /* CreateCharacter.swift in Sources */,
+				B9112F84298875F20026457C /* Friend.swift in Sources */,
 				B98449C72985AACD00004884 /* LineView.swift in Sources */,
 				B98449BF2985AAAE00004884 /* randomEvents.swift in Sources */,
 			);
